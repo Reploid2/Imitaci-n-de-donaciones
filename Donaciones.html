@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Donaciones</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0d0d0d;
+            color: #e6e6e6;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #1a1a1a;
+            border: 2px solid #c0c0c0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c0c0c0;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #c0c0c0;
+        }
+
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
+        button {
+            width: 95%;
+            padding: 12px;
+            margin-top: 10px;
+            background: linear-gradient(45deg, gold, #c0c0c0);
+            border: none;
+            border-radius: 5px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        h1 {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Donación</h1>
+
+    <!-- Espacio para imagen -->
+    
+         <img src="logo.jpeg" width="400" height="250"> 
+
+    
+
+    <!-- Formulario -->
+    <form id="donationForm">
+        <input type="text" placeholder="Nombre" required>
+        <input type="email" placeholder="Email" required>
+
+        <select required>
+            <option value="">Método de pago</option>
+            <option>Tarjeta</option>
+            <option>PayPal</option>
+            <option>ATH Móvil</option>
+        </select>
+
+        <button type="submit">Confirmar donación</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById("donationForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        alert("Donación confirmada (simulación)");
+        this.reset(); // Limpia el formulario
+    });
+</script>
+
+</body>
+</html>
