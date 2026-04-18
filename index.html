@@ -2,12 +2,12 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Donaciones</title>
+    <title>Subscripciones</title>
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #0d0d0d;
+            background: linear-gradient(135deg, #4facfe, #00f2a1);
             color: #e6e6e6;
         }
 
@@ -22,16 +22,56 @@
             width: 100%;
             height: 180px;
             object-fit: cover;
-            border: 2px solid #c0c0c0;
+            border: 2px solid #1e90ff;
             border-radius: 8px;
             margin-bottom: 20px;
         }
 
+        h1 {
+            color: #1e90ff;
+        }
+
+        .plans {
+            margin-bottom: 20px;
+        }
+
+        .plan {
+            border: 1px solid #1e90ff;
+            padding: 10px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 8px;
+            background-color: #111827;
+            transition: 0.3s;
+        }
+
+        .plan:hover {
+            background-color: #1e293b;
+            transform: scale(1.03);
+        }
+
+        /* 🔥 PLAN SELECCIONADO */
+        .plan.active {
+            background-color: #1e90ff;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .benefits {
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #1e90ff;
+            border-radius: 8px;
+            display: none;
+            background-color: rgba(0,0,0,0.4);
+            text-align: left;
+        }
+
         form {
-            background-color: #1a1a1a;
+            background-color: #111827;
             padding: 20px;
             border-radius: 10px;
-            border: 1px solid #c0c0c0;
+            border: 1px solid #1e90ff;
         }
 
         input, select {
@@ -40,19 +80,15 @@
             margin: 10px 0;
             border: none;
             border-radius: 5px;
-            background-color: #333;
+            background-color: #1e293b;
             color: #fff;
-        }
-
-        input::placeholder {
-            color: #aaa;
         }
 
         button {
             width: 95%;
             padding: 12px;
             margin-top: 10px;
-            background: linear-gradient(45deg, gold, #c0c0c0);
+            background: linear-gradient(45deg, #1e90ff, #00bfff);
             border: none;
             border-radius: 5px;
             color: #000;
@@ -63,45 +99,119 @@
         button:hover {
             opacity: 0.85;
         }
-
-        h1 {
-            color: gold;
-        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Donación</h1>
+    <h1>Subscripciones</h1>
 
-    <!-- Imagen -->
-      <img src="logo.jpeg" width="400" height="250"> 
+    <img src="logo.jpeg" alt="Subscripcion" class="banner">
 
-    <!-- Formulario -->
+    <div class="plans">
+        <div class="plan" onclick="selectPlan(this, 'basico')">Plan Basico - $20</div>
+        <div class="plan" onclick="selectPlan(this, 'pro')">Plan Pro - $40</div>
+        <div class="plan" onclick="selectPlan(this, 'premium')">Plan Premium - $60</div>
+    </div>
+
+    <div id="benefits" class="benefits"></div>
+
     <form id="donationForm">
         <input type="text" placeholder="Nombre" required>
         <input type="email" placeholder="Email" required>
 
-        <!-- NUEVO CAMPO -->
-        <input type="number" placeholder="Cantidad a donar ($)" min="1" required>
-
         <select required>
-            <option value="">Método de pago</option>
+            <option value="">Metodo de pago</option>
             <option>Tarjeta</option>
             <option>PayPal</option>
-            <option>ATH Móvil</option>
+            <option>ATH Movil</option>
         </select>
 
-        <button type="submit">Confirmar donación</button>
+        <button type="submit">Confirmar subscripcion</button>
     </form>
 </div>
 
 <script>
-    document.getElementById("donationForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        alert("Donación confirmada (simulación)");
-        this.reset();
-    });
+function selectPlan(element, plan) {
+    // Quitar seleccion anterior
+    const plans = document.querySelectorAll(".plan");
+    plans.forEach(p => p.classList.remove("active"));
+
+    // Activar el seleccionado
+    element.classList.add("active");
+
+    // Mostrar beneficios
+    showBenefits(plan);
+}
+
+function showBenefits(plan) {
+    const benefitsDiv = document.getElementById("benefits");
+    let content = "";
+
+    if (plan === "basico") {
+        content = `
+        <strong>Plan Basico: Conectividad Esencial</strong><br><br>
+        <b>Clases:</b><br>
+        - 2 sesiones grupales al mes (60 min c/u)<br>
+        - Uso de correo, seguridad basica y redes sociales<br><br>
+
+        <b>Asistencia tecnica:</b><br>
+        - Soporte remoto ilimitado (chat o telefono)<br><br>
+
+        <b>Visitas:</b><br>
+        - No incluye (o 1 visita anual preventiva)<br><br>
+
+        <b>Reparaciones:</b><br>
+        - Diagnostico gratuito<br>
+        - 10% de descuento en mano de obra
+        `;
+    } 
+    else if (plan === "pro") {
+        content = `
+        <strong>Plan Pro: Usuario Digital Independiente</strong><br><br>
+        <b>Clases:</b><br>
+        - 4 sesiones al mes (opcion 1 a 1)<br>
+        - Productividad, edicion de fotos/video, archivos<br><br>
+
+        <b>Asistencia tecnica:</b><br>
+        - Soporte prioritario (< 4 horas)<br><br>
+
+        <b>Visitas:</b><br>
+        - 1 visita trimestral (optimizacion y limpieza)<br><br>
+
+        <b>Reparaciones:</b><br>
+        - 2 reparaciones de software al ano incluidas<br>
+        - 20% descuento en hardware
+        `;
+    } 
+    else if (plan === "premium") {
+        content = `
+        <strong>Plan Premium: Tecnologia Total</strong><br><br>
+        <b>Clases:</b><br>
+        - Sesiones ilimitadas (hasta 8/mes)<br>
+        - Curriculo personalizado<br><br>
+
+        <b>Asistencia tecnica:</b><br>
+        - Soporte 24/7 con acceso inmediato<br><br>
+
+        <b>Visitas:</b><br>
+        - 1 visita mensual (sincronizacion total)<br><br>
+
+        <b>Reparaciones:</b><br>
+        - Mano de obra gratuita<br>
+        - Instalacion de equipos y perifericos
+        `;
+    }
+
+    benefitsDiv.innerHTML = content;
+    benefitsDiv.style.display = "block";
+}
+
+document.getElementById("donationForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert("Subscripcion confirmada (simulacion)");
+    this.reset();
+});
 </script>
 
 </body>
